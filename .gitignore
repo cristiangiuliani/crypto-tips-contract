@@ -1,0 +1,11 @@
+# Logs
+logs
+*.log
+.env
+.env.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+.vim/
