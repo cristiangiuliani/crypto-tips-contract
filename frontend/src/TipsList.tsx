@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { usePublicClient } from 'wagmi';
-import { TIP_JAR_CONFIG } from './config';
 import { formatEther } from 'viem';
+import { usePublicClient } from 'wagmi';
+
+import { TIP_JAR_CONFIG } from './config';
 
 interface Tip {
   sender: string;
@@ -13,7 +14,7 @@ interface Tip {
 const TipsList = () => {
   const [tips, setTips] = useState<Tip[]>([]);
   const [loading, setLoading] = useState(true);
-  
+
   const publicClient = usePublicClient();
 
   useEffect(() => {
@@ -28,11 +29,12 @@ const TipsList = () => {
           fromBlock: 0n,
           toBlock: 'latest',
         });
-console.log('logs', logs);
 
         // Parse events into Tip objects
         const parsedTips: Tip[] = logs.map((log: any) => {
-          const { sender, amount, message, timestamp } = log.args as {
+          const {
+            sender, amount, message, timestamp,
+          } = log.args as {
             sender: string;
             amount: bigint;
             message: string;

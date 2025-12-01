@@ -7,7 +7,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "homepage": "/scorecrypto-tips-contractcards",
+  "homepage": "/crypto-tips-contract",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

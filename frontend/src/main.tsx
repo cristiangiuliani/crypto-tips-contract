@@ -23,7 +23,10 @@ const anvil = defineChain({
     },
   },
   blockExplorers: {
-    default: { name: 'Anvil', url: 'http://localhost:8545' },
+    default: {
+      name: 'Anvil',
+      url: 'http://localhost:8545',
+    },
   },
   testnet: true,
 });

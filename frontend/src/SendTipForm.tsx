@@ -1,22 +1,27 @@
-import { useState, useEffect } from 'react';
-import { useWriteContract, useAccount, useWaitForTransactionReceipt } from 'wagmi';
+import React, { useState, useEffect } from 'react';
 import { parseEther } from 'viem';
+import {
+  useWriteContract, useAccount, useWaitForTransactionReceipt,
+} from 'wagmi';
+
 import { TIP_JAR_CONFIG } from './config';
 
 const SendTipForm = () => {
   const [message, setMessage] = useState('');
   const [amount, setAmount] = useState('0.01');
-  
-  const { address, isConnected } = useAccount();
-  const { data: hash, writeContract, isPending, error } = useWriteContract();
-  
+
+  const { isConnected } = useAccount();
+  const {
+    data: hash, writeContract, isPending, error,
+  } = useWriteContract();
+
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
     hash,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!isConnected) {
       alert('Please connect your wallet first!');
       return;
@@ -45,7 +50,7 @@ const SendTipForm = () => {
   return (
     <div className="send-tip-form">
       <h2>Send a Tip</h2>
-      
+
       {!isConnected ? (
         <p>Please connect your wallet to send a tip</p>
       ) : (
@@ -77,8 +82,8 @@ const SendTipForm = () => {
             <small>{message.length}/280</small>
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={isPending || isConfirming}
           >
             {isPending && 'Preparing...'}
