@@ -93,7 +93,7 @@ const SendTipForm = () => {
 
           {hash && (
             <div className="tx-status">
-              Transaction Hash: {hash.slice(0, 10)}...{hash.slice(-8)}
+              Transaction Hash: {hash.slice(0, 10) }...{hash.slice(-8)}
             </div>
           )}
 

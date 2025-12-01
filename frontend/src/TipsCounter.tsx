@@ -1,7 +1,11 @@
 import { useReadContract } from 'wagmi';
-import { TIP_JAR_CONFIG } from './config'
+
+import { TIP_JAR_CONFIG } from './config';
+
 const TipsCounter = () => {
-  const { data: totalTips, isLoading, error } = useReadContract({
+  const {
+    data: totalTips, isLoading, error,
+  } = useReadContract({
     ...TIP_JAR_CONFIG,
     functionName: 'totalTipsCount',
   });
