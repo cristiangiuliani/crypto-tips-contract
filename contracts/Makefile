@@ -6,6 +6,9 @@ export
 GREEN := \033[0;32m
 NC := \033[0m # No Color
 
+# Parameters
+CONTRACT_NAME=Test
+
 .PHONY: help build test clean deploy-local deploy-testnet deploy-mainnet verify
 
 # Default target
@@ -21,7 +24,6 @@ help:
 	@echo "$(GREEN)Deploy commands:$(NC)"
 	@echo "  make deploy-local                  - Deploy TipJar to Anvil (default)"
 	@echo "  make deploy-local-tipjar           - Deploy TipJar to Anvil"
-	@echo "  make deploy-local-counter          - Deploy Counter to Anvil"
 	@echo "  make deploy-local-test STRING='X'  - Deploy Test to Anvil with string"
 	@echo "  make deploy-testnet                - Deploy to Base Sepolia"
 	@echo "  make deploy-mainnet                - Deploy to Base mainnet"
@@ -72,14 +74,6 @@ deploy-local:
 deploy-local-tipjar:
 	@echo "$(GREEN)Deploying TipJar to Anvil...$(NC)"
 	forge script script/Deploy.s.sol \
-		--rpc-url http://localhost:8545 \
-		--private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 \
-		--broadcast
-
-# Deploy Counter to local
-deploy-local-counter:
-	@echo "$(GREEN)Deploying Counter to Anvil...$(NC)"
-	forge script script/DeployCounter.s.sol \
 		--rpc-url http://localhost:8545 \
 		--private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 \
 		--broadcast
@@ -147,3 +141,25 @@ update:
 coverage:
 	@echo "$(GREEN)Generating test coverage...$(NC)"
 	forge coverage
+
+generate-mock:
+	@echo "$(GREEN)Generating mock for $(CONTRACT_NAME)...$(NC)"
+	@mkdir -p ../frontend/src/__mocks__
+	@if [ "$(CONTRACT_NAME)" = "TipJar" ]; then \
+		cat out/TipsJar.sol/TipJar.json | jq '.abi' > ../frontend/src/__mocks__/TipJar.json; \
+	else \
+		cat out/$(CONTRACT_NAME).sol/$(CONTRACT_NAME).json | jq '.abi' > ../frontend/src/__mocks__/$(CONTRACT_NAME).json; \
+	fi
+	@echo "$(GREEN)ABI saved to ../frontend/src/__mocks__/$(CONTRACT_NAME).json$(NC)"
+
+# Shortcut per generare mock di TipJar
+generate-mock-tipjar:
+	@$(MAKE) generate-mock CONTRACT_NAME=TipJar
+
+# Shortcut per generare mock di Counter
+generate-mock-counter:
+	@$(MAKE) generate-mock CONTRACT_NAME=Counter
+
+# Shortcut per generare mock di Test
+generate-mock-test:
+	@$(MAKE) generate-mock CONTRACT_NAME=Test
