@@ -19,10 +19,11 @@
     "setup:tssdk": "yarn dlx @yarnpkg/sdks vscode"
   },
   "dependencies": {
+    "@base-ui-components/react": "^1.0.0-beta.7",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.2",
-    "@mui/material": "^7.3.2",
+    "@mui/material": "^7.3.5",
     "@mui/system": "^7.3.3",
     "@mui/x-charts": "^8.16.0",
     "@rainbow-me/rainbowkit": "^2.2.9",
