@@ -9,7 +9,6 @@ import TipsListContainer from '../containers/TipsList.container';
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
-
   },
 });
 
@@ -17,12 +16,20 @@ const PageLayout = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <Container>
-        <Grid container spacing={2}>
-          <Grid>
+      <Container sx={{
+        background: 'radial-gradient( #002088, black)',
+        minHeight: '100vh',
+        padding: 0,
+        margin: 0,
+        width: '100%',
+        maxWidth: '100% !important',
+      }}
+      >
+        <Grid container justifyContent='center' alignItems='center' sx={{ height: '100vh' }}>
+          <Grid sx={{ maxWidth: '22rem' }}>
             <SendTipFormContainer />
           </Grid>
-          <Grid>
+          <Grid sx={{ display: 'none' }}>
             <TipsCounter />
             <TipsListContainer />
           </Grid>

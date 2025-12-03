@@ -1,5 +1,6 @@
 import {
   Box, Button, Card, CardContent, CardHeader, Divider, TextField, Typography, Stack,
+  Alert,
 } from '@mui/material';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import React, { useState } from 'react';
@@ -34,7 +35,12 @@ const SendTipFormComponent = ({
   };
 
   return (
-    <Card variant="outlined">
+    <Card
+      variant="outlined"
+      sx={{
+        background: 'linear-gradient(to bottom, #08339c, #051f60)',
+      }}
+    >
       <CardHeader
         title="Send a Tip"
       />
@@ -68,29 +74,40 @@ const SendTipFormComponent = ({
               placeholder="Leave a message..."
             />
 
-            <Button variant="contained" type="submit" disabled={receipt?.isPending || receipt?.isConfirming}>
-              {receipt?.isPending && 'Preparing...'}
-              {receipt?.isConfirming && 'Confirming...'}
-              {!receipt?.isPending && !receipt?.isConfirming && 'Send Tip 💎'}
-            </Button>
+            <Box>
+              <Button
+                variant="contained"
+                type="submit"
+                disabled={receipt?.isPending || receipt?.isConfirming || !isConnected}
+                sx={{
+                  background: '#194ac6',
+                  width: '100%',
+                  color: 'white',
+                  '&:hover': { background: '#4965cf' },
+                }}
+              >
+                {receipt?.isPending && 'Preparing...'}
+                {receipt?.isConfirming && 'Confirming...'}
+                {!receipt?.isPending && !receipt?.isConfirming && 'Send Tip'}
+              </Button>
+              {receipt?.hash && (
+                <Alert severity="info">
+                  Transaction Hash: {receipt?.hash.slice(0, 10) }...{receipt?.hash.slice(-8)}
+                </Alert>
+              )}
 
-            {receipt?.hash && (
-              <div className="tx-status">
-                Transaction Hash: {receipt?.hash.slice(0, 10) }...{receipt?.hash.slice(-8)}
-              </div>
-            )}
+              {receipt?.isSuccess && (
+                <Alert variant="filled" severity="success" sx={{ color: 'white' }}>
+                  Tip sent successfully!
+                </Alert>
+              )}
 
-            {receipt?.isSuccess && (
-              <div className="success-message">
-                ✅ Tip sent successfully!
-              </div>
-            )}
-
-            {receipt?.error && (
-              <div className="error-message">
-                ❌ Error: {receipt.error.message}
-              </div>
-            )}
+              {receipt?.error && (
+                <Alert variant="filled" severity="error" sx={{ color: 'white' }}>
+                  Error: {receipt.error.message}
+                </Alert>
+              )}
+            </Box>
           </Stack>
         </form>
       </CardContent>

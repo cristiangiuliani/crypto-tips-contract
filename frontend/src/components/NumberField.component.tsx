@@ -2,7 +2,6 @@ import { NumberField as BaseNumberField } from '@base-ui-components/react/number
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
@@ -106,13 +105,6 @@ const NumberFieldComponent = ({
           />
         )}
       />
-      <FormHelperText sx={{
-        ml: 0,
-        '&:empty': { mt: 0 },
-      }}
-      >
-        Enter value between 10 and 40
-      </FormHelperText>
     </BaseNumberField.Root>
   );
 };
