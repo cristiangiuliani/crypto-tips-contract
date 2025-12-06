@@ -87,6 +87,16 @@ deploy-local-test:
 		--private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 \
 		--broadcast
 
+# Deploy to Sepolia testnet
+deploy-sepolia:
+	@echo "$(GREEN)Deploying to Ethereum Sepolia...$(NC)"
+	forge script script/Deploy.s.sol \
+		--rpc-url $(SEPOLIA_RPC_URL) \
+		--private-key $(PRIVATE_KEY) \
+		--broadcast \
+		--verify \
+		--etherscan-api-key $(ETHERSCAN_API_KEY)
+
 # Deploy to Base Sepolia testnet
 deploy-testnet:
 	@echo "$(GREEN)Deploying to Base Sepolia...$(NC)"
@@ -95,7 +105,7 @@ deploy-testnet:
 		--private-key $(PRIVATE_KEY) \
 		--broadcast \
 		--verify \
-		--etherscan-api-key $(BASESCAN_API_KEY)
+		--etherscan-api-key $(ETHERSCAN_API_KEY)
 
 # Deploy to Base mainnet
 deploy-mainnet:
@@ -107,7 +117,7 @@ deploy-mainnet:
 		--private-key $(PRIVATE_KEY) \
 		--broadcast \
 		--verify \
-		--etherscan-api-key $(BASESCAN_API_KEY)
+		--etherscan-api-key $(ETHERSCAN_API_KEY)
 
 # Verify contract (if deploy didn't auto-verify)
 verify:
@@ -115,7 +125,7 @@ verify:
 	@echo "Usage: make verify ADDRESS=0x... CONTRACT=TipJar"
 	forge verify-contract $(ADDRESS) src/TipJar.sol:$(CONTRACT) \
 		--chain-id 84532 \
-		--etherscan-api-key $(BASESCAN_API_KEY)
+		--etherscan-api-key $(ETHERSCAN_API_KEY)
 
 # Format code
 format:
