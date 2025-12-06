@@ -1,3 +1,7 @@
+import {
+  Typography, Container, Card, CardHeader, CardContent,
+} from '@mui/material';
+
 import type { ITip } from '../interfaces/tips.interface';
 
 type TTipsListComponentProps = {
@@ -9,29 +13,29 @@ const TipsListComponent = ({ tips, loading }: TTipsListComponentProps) => {
   if (loading) return <div>Loading tips...</div>;
 
   return (
-    <div className="tips-list">
-      <h2>Recent Tips</h2>
+    <Container>
       {tips.length === 0 ? (
-        <p>No tips yet!</p>
+        <Typography>No tips yet!</Typography>
       ) : (
-        <div className="tips-grid">
+        <>
           {tips.map((tip, index) => (
-            <div key={index} className="tip-card">
-              <div className="tip-header">
-                <span className="tip-sender">
+            <Card key={index}>
+              <CardHeader title={`${tip.amount} ETH`} />
+              <CardContent>
+                <Typography variant="body2">
                   {tip.sender.slice(0, 6)}...{tip.sender.slice(-4)}
-                </span>
-                <span className="tip-amount">{tip.amount} ETH</span>
-              </div>
-              <div className="tip-message">{tip.message}</div>
-              <div className="tip-date">
-                {new Date(tip.timestamp * 1000).toLocaleString()}
-              </div>
-            </div>
+                </Typography>
+
+                <Typography variant="body2">{tip.message}</Typography>
+                <Typography variant="body2">
+                  {new Date(tip.timestamp * 1000).toLocaleString()}
+                </Typography>
+              </CardContent>
+            </Card>
           ))}
-        </div>
+        </>
       )}
-    </div>
+    </Container>
   );
 };
 

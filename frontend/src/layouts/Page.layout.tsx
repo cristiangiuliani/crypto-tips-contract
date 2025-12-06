@@ -29,7 +29,7 @@ const PageLayout = () => {
           <Grid sx={{ maxWidth: '22rem' }}>
             <SendTipFormContainer />
           </Grid>
-          <Grid sx={{ display: 'none' }}>
+          <Grid>
             <TipsCounter />
             <TipsListContainer />
           </Grid>

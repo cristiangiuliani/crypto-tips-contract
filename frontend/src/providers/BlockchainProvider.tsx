@@ -1,41 +1,28 @@
-import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import {
+  getDefaultConfig, RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import React from 'react';
-import { http, defineChain } from 'viem';
+import { http } from 'viem';
 import { WagmiProvider } from 'wagmi';
+import {
+  sepolia, // anvil,
+} from 'wagmi/chains';
 
 import '@rainbow-me/rainbowkit/styles.css';
 
 const BlockchainProvider = ({ children }: { children: React.ReactNode }) => {
-  const anvil = defineChain({
-    id: 31337, // Anvil chain ID
-    name: 'Anvil',
-    nativeCurrency: {
-      decimals: 18,
-      name: 'Ethereum',
-      symbol: 'ETH',
-    },
-    rpcUrls: {
-      default: {
-        http: ['http://localhost:8545'],
-      },
-    },
-    blockExplorers: {
-      default: {
-        name: 'Anvil',
-        url: 'http://localhost:8545',
-      },
-    },
-    testnet: true,
-  });
-
   // RainbowKit config
   const config = getDefaultConfig({
     appName: 'TipsJar',
     projectId: 'acefd871415f61f89068d028cf27a085',
-    chains: [anvil],
+    chains: [
+      // anvil,
+      sepolia,
+    ],
     transports: {
-      [anvil.id]: http(),
+      // [anvil.id]: http('http://127.0.0.1:8545'),
+      [sepolia.id]: http(),
     },
   });
 

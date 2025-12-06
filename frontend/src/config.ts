@@ -2,6 +2,8 @@
 // import TipJarJSON from './__mocks__/TipJar.json';
 
 export const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS as `0x${string}`;
+export const SEPOLIA_CONTRACT_ADDRESS = import.meta.env.VITE_SEPOLIA_CONTRACT_ADDRESS as `0x${string}`;
+export const SEPOLIA_RPC_URL = import.meta.env.VITE_SEPOLIA_RPC_URL as string;
 
 export const TIP_JAR_ABI = [
   {
@@ -121,7 +123,9 @@ export const TIP_JAR_ABI = [
 ] as const;
 
 export const TIP_JAR_CONFIG = {
-  address: CONTRACT_ADDRESS,
   abi: TIP_JAR_ABI,
-  chainId: 31337,
+  // address: CONTRACT_ADDRESS,
+  // chainId: 31337,
+  address: SEPOLIA_CONTRACT_ADDRESS,
+  chainId: 11155111,
 } as const;

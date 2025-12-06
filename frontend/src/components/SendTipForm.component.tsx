@@ -91,7 +91,7 @@ const SendTipFormComponent = ({
                 {!receipt?.isPending && !receipt?.isConfirming && 'Send Tip'}
               </Button>
               {receipt?.hash && (
-                <Alert severity="info">
+                <Alert severity="info" sx={{ background: 'transparent' }}>
                   Transaction Hash: {receipt?.hash.slice(0, 10) }...{receipt?.hash.slice(-8)}
                 </Alert>
               )}

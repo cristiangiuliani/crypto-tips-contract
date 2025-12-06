@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { formatEther } from 'viem';
-import { usePublicClient } from 'wagmi';
+import { useAccount, usePublicClient } from 'wagmi';
 
 import TipsListComponent from '../components/TipsList.component';
 import { TIP_JAR_CONFIG } from '../config';
@@ -11,7 +11,8 @@ const TipsListContainer = () => {
   const [tips, setTips] = useState<ITip[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const publicClient = usePublicClient();
+  const { chain } = useAccount();
+  const publicClient = usePublicClient({ chainId: chain?.id });
 
   const fetchTips = async () => {
     if (!publicClient) return;
@@ -19,10 +20,13 @@ const TipsListContainer = () => {
     try {
       setLoading(true);
       // Get all TipReceived events
+      const currentBlock = await publicClient.getBlockNumber();
+      const fromBlock = currentBlock - 1000n;
+
       const logs = await publicClient.getContractEvents({
         ...TIP_JAR_CONFIG,
         eventName: 'TipReceived',
-        fromBlock: 0n,
+        fromBlock: fromBlock > 0n ? fromBlock : 0n,
         toBlock: 'latest',
       });
 

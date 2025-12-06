@@ -163,7 +163,7 @@ make deploy-testnet
 - `.env` file configured with:
   - `BASE_SEPOLIA_RPC_URL`
   - `PRIVATE_KEY`
-  - `BASESCAN_API_KEY`
+  - `ETHERSCAN_API_KEY`
 - Testnet ETH in your wallet (from faucet)
 
 **Output:**
@@ -377,7 +377,7 @@ The Makefile automatically loads `.env` file. Required variables:
 BASE_SEPOLIA_RPC_URL=https://base-sepolia.g.alchemy.com/v2/YOUR_KEY
 BASE_RPC_URL=https://base-mainnet.g.alchemy.com/v2/YOUR_KEY
 PRIVATE_KEY=0xYOUR_PRIVATE_KEY
-BASESCAN_API_KEY=YOUR_API_KEY
+ETHERSCAN_API_KEY=YOUR_API_KEY
 ```
 
 **For local Anvil deployment:** No `.env` needed!
@@ -422,7 +422,7 @@ sudo apt-get install make
 ### "Contract verification failed"
 
 **Solution:**
-- Check `BASESCAN_API_KEY` is correct
+- Check `ETHERSCAN_API_KEY` is correct
 - Wait 1 minute, try manual verification:
 ```bash
   make verify ADDRESS=0x... CONTRACT=TipJar

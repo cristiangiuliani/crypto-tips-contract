@@ -20,7 +20,6 @@ const SendTipFormContainer = () => {
       alert('Please connect your wallet first!');
       return;
     }
-    console.log('DATA', amount, message);
 
     try {
       await writeContract({
