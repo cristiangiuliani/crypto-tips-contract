@@ -24,7 +24,6 @@ help:
 	@echo "$(GREEN)Deploy commands:$(NC)"
 	@echo "  make deploy-local                  - Deploy TipJar to Anvil (default)"
 	@echo "  make deploy-local-tipjar           - Deploy TipJar to Anvil"
-	@echo "  make deploy-local-test STRING='X'  - Deploy Test to Anvil with string"
 	@echo "  make deploy-testnet                - Deploy to Base Sepolia"
 	@echo "  make deploy-mainnet                - Deploy to Base mainnet"
 	@echo "  make verify                        - Verify contract on Basescan"
@@ -74,15 +73,6 @@ deploy-local:
 deploy-local-tipjar:
 	@echo "$(GREEN)Deploying TipJar to Anvil...$(NC)"
 	forge script script/Deploy.s.sol \
-		--rpc-url http://localhost:8545 \
-		--private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 \
-		--broadcast
-
-# Deploy Test to local
-# Usage: make deploy-local-test STRING="Hello World"
-deploy-local-test:
-	@echo "$(GREEN)Deploying Test to Anvil...$(NC)"
-	INITIAL_STRING="$(STRING)" forge script script/DeployTest.s.sol \
 		--rpc-url http://localhost:8545 \
 		--private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 \
 		--broadcast
@@ -165,11 +155,3 @@ generate-mock:
 # Shortcut per generare mock di TipJar
 generate-mock-tipjar:
 	@$(MAKE) generate-mock CONTRACT_NAME=TipJar
-
-# Shortcut per generare mock di Counter
-generate-mock-counter:
-	@$(MAKE) generate-mock CONTRACT_NAME=Counter
-
-# Shortcut per generare mock di Test
-generate-mock-test:
-	@$(MAKE) generate-mock CONTRACT_NAME=Test
