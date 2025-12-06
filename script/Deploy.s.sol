@@ -13,14 +13,14 @@ import {console} from "forge-std/console.sol";
 contract DeployTipJar is Script {
     function run() external returns (TipJar) {
         vm.startBroadcast();
-        
+
         TipJar tipJar = new TipJar();
-        
+
         console.log("TipJar deployed to:", address(tipJar));
         console.log("Owner:", tipJar.owner());
-        
+
         vm.stopBroadcast();
-        
+
         return tipJar;
     }
 }
